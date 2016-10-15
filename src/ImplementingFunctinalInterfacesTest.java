@@ -1,10 +1,9 @@
+import javax.naming.CompositeName;
 import java.util.*;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import java.util.function.*;
 
 /**
- * Created by dev on 13/10/16.
+ * Created by ngracia on 13/10/16.
  */
 public class ImplementingFunctinalInterfacesTest {
     public static void main(String args []){
@@ -13,6 +12,8 @@ public class ImplementingFunctinalInterfacesTest {
         implementingFunctinalInterfacesTest.testConsumer();
         implementingFunctinalInterfacesTest.testSupplier();
         implementingFunctinalInterfacesTest.testBiConsumer();
+        implementingFunctinalInterfacesTest.testPredicate();
+        implementingFunctinalInterfacesTest.testBiPredicate();
     }
 
     private void testSupplier(){
@@ -81,11 +82,29 @@ public class ImplementingFunctinalInterfacesTest {
 
     private void testPredicate(){
         //Filtering or matching
+        Predicate<String> predicate = String::isEmpty;
+        Consumer<Boolean> consumer = System.out::println;
+        Consumer<String> consumer1 = System.out::println;
+        consumer1.accept("\n");
+        consumer.accept(predicate.test(""));
 
     }
 
     private void testBiPredicate(){
         //Filtering or matching
+        String p = "hi";
+
+        BiPredicate<String, String> biPredicate = (x , y) -> p.startsWith(x) && p.endsWith(y);
+        Consumer<Boolean> consumer = System.out::println;
+        consumer.accept(biPredicate.test("g","f"));
+        consumer.accept(biPredicate.test("h","i"));
+    }
+
+    private void testFunction(){
+
+    }
+
+    private void testBiFunction(){
 
     }
 }

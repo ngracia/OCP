@@ -1,27 +1,29 @@
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.function.Consumer;
 
 /**
- * Created by dev on 13/10/16.
+ * Created by dev on 15/10/16.
  */
 public class ZooInfo {
     public static void main(String [] args){
         ExecutorService service = null;
         try{
             service = Executors.newSingleThreadExecutor();
-            Consumer<String> print = System.out::println;
+            service.execute(() -> System.out.println("Print zoo inventory"));
+            service.execute(() -> {
+                for(int i = 0; i<3; i++){
+                    System.out.println("Print record: " + i);
+                }
+            });
 
-            print.accept("begin");
-            service.execute(() -> print.accept("Printing zoo inventory"));
-            service.execute( () -> { for (int i = 0; i < 3; i++){
-                print.accept("Println record: " +i);
-            }});
-            service.execute(()->print.accept("Printing zoo inventory"));
-            print.accept("end");
+            service.execute(() -> System.out.println("Printing zoo inventory"));
+            System.out.println("end");
+
+
+        }catch (Exception ex){
 
         }finally {
-            if(service != null){
+            if(service == null){
                 service.shutdown();
             }
         }
