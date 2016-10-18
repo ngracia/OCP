@@ -7,12 +7,12 @@ import java.util.stream.Stream;
  */
 public class TestStream_1 {
     public static void main(String args []){
-        List<String> list  = Arrays.asList("Toby", "Anna", "Leroy", "Alex");
+        List<String> list = Arrays.asList("Toby","Anna","Leroy","Alex");
         Stream<String> stream = list.stream();
 
-        stream.filter(n -> n.length() >= 4)
+        stream.filter(x -> x.length() == 4)
                 .sorted()
-                .limit(4)
+                .limit(3)
                 .forEach(System.out::println);
     }
 }
