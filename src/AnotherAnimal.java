@@ -1,11 +1,13 @@
 /**
  * Created by dev on 22/10/16.
  */
-public class Cat extends AnotherAnimal{
+public class AnotherAnimal {
     private String name;
 
-    public Cat(String name){
+    AnotherAnimal(){
+    }
 
+    AnotherAnimal(String name){
         this.name = name;
     }
 

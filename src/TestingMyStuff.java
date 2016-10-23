@@ -7,12 +7,12 @@ import java.util.List;
 public class TestingMyStuff {
     public static void main(String [] args){
         TestingMyStuff testingMyStuff = new TestingMyStuff();
-        testingMyStuff.testDog();
-        testingMyStuff.testCat();
+        TestGenerics testGenerics = new TestGenerics();
+        testingMyStuff.testDog(testGenerics);
+        testingMyStuff.testCat(testGenerics);
     }
 
-    public  void testDog(){
-        TestGenerics<Dog> testGenerics = new TestGenerics<>();
+    public  void testDog(TestGenerics testGenerics){
         List<Dog> dogList = new ArrayList<>();
         testGenerics.add(dogList, new Dog("Hera"));
         testGenerics.add(dogList, new Dog("Kora"));
@@ -21,8 +21,7 @@ public class TestingMyStuff {
         testGenerics.printList(dogList);
     }
 
-    public void testCat(){
-        TestGenerics<Cat> testGenerics = new TestGenerics<>();
+    public void testCat(TestGenerics testGenerics){
         List<Cat> catList = new ArrayList<>();
         testGenerics.add(catList, new Cat("Isidoro"));
         testGenerics.add(catList, new Cat("Casimiro"));
