@@ -14,7 +14,5 @@ public class TestSquirrel {
         squirrel.add(new Squirrel("test2"));
         squirrel.add(new Squirrel("test3"));
         squirrel.add(new Squirrel("test4"));
-
-
     }
 }
