@@ -1,7 +1,7 @@
 package chapter4;
 
-import com.sun.xml.internal.ws.resources.StreamingMessages;
-
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.stream.Stream;
 
@@ -20,6 +20,12 @@ public class IntermediateOperations {
         intermediateOperationsSkip();
         consumer.accept("");
         intermediateOperationsMap();
+        consumer.accept("");
+        intermediateOperationsFlatMap();
+        consumer.accept("");
+        intermediateOperationsSorted();
+        consumer.accept("");
+        intermediateOperationsPeek();
     }
 
     public static void intermediateOperationsFilter(){
@@ -45,5 +51,26 @@ public class IntermediateOperations {
     public static void intermediateOperationsMap(){
         Stream<String> s = Stream.of("monkey","gorilla", "bonobo");
         s.map(x -> x.length()).forEach(System.out::println);
+    }
+
+    public static void intermediateOperationsFlatMap(){
+        List<String> zero = Arrays.asList();
+        List<String> one = Arrays.asList("Bonobo");
+        List<String> two = Arrays.asList("Mom Gorilla", "Baby Gorilla");
+        List<String> three = Arrays.asList("Mom Chimpanzee", "Daddy Chimpanzee", "Baby Chimpanzee");
+        Stream<List<String>> animals = Stream.of(zero, one, two, three);
+        animals.flatMap(l -> l.stream()).forEach(System.out::println);
+    }
+
+    public static void intermediateOperationsSorted(){
+        Stream<String> s = Stream.of("monkey", "gorilla", "bonobo");
+        s.sorted().forEach(System.out::println);
+    }
+
+    public static void intermediateOperationsPeek(){
+        Consumer<Long> consumer = System.out::println;
+        Stream<String> s = Stream.of("black bear", "brown bear", "grizzly");
+        long count = s.filter(x -> x.startsWith("g")).peek(System.out::println).count();
+        consumer.accept(count);
     }
 }
