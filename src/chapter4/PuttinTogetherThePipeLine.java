@@ -1,8 +1,12 @@
 package chapter4;
 
+import java.nio.file.FileSystemNotFoundException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalDouble;
 import java.util.function.Consumer;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
@@ -10,6 +14,12 @@ import java.util.stream.Stream;
  */
 public class PuttinTogetherThePipeLine {
     public static void main(String ... args){
+
+        //Types of primitive Streams
+        //IntStream: Used for the primitive types int, short, bytes and char.
+        //LongStream: Used for the primitive type long.
+        //DoubleStream: Used fot he primitive types double and float.
+
         Consumer<String> s = System.out::println;
         //testOne();
         //s.accept("");
@@ -19,6 +29,8 @@ public class PuttinTogetherThePipeLine {
         //s.accept("");
         //testFour();
         //testSix();
+        //testSeven();
+        testNine();
     }
 
     public static void testOne(){
@@ -66,4 +78,29 @@ public class PuttinTogetherThePipeLine {
                  .limit(5)
                  .forEach(System.out::println);
     }
+
+    public static void testSeven(){
+        Consumer<Integer> consumer = System.out::println;
+        Stream<Integer> s = Stream.of(1,2,3);
+        consumer.accept(s.reduce(0, (x,y) -> x + y));
+    }
+
+    public static void testEight(){
+        Consumer<Integer> consumer = System.out::println;
+        Stream<Integer> s = Stream.of(1,2,3);
+        consumer.accept(s.mapToInt(x -> x).sum());
+    }
+
+    public static void testNine(){
+        Consumer<Double> consumer = System.out::println;
+        IntStream intStream = IntStream.of(1,2,3);
+        OptionalDouble avg = intStream.average();
+        consumer.accept(avg.getAsDouble());
+    }
+
+    public static void testTen(){
+        Stream<IntStream> s = Stream.of();
+    }
+
+
 }
