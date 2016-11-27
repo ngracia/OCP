@@ -17,6 +17,9 @@ public class Animals implements Comparable<Animals> {
         this.species = species;
         this.age = age;
     }
+    public Animals(int age){
+
+    }
 
     @Override
     public String toString(){
