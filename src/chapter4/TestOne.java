@@ -1,20 +1,19 @@
 package chapter4;
 
 import java.time.LocalTime;
+import java.util.Arrays;
+import java.util.IdentityHashMap;
+import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
+import java.util.stream.Stream;
 
 /**
  * Created by dev on 24/11/16.
  */
 public class TestOne {
     public static void main(String args []){
-        Consumer<LocalTime> consumer = System.out::println;
-        Supplier<LocalTime> time = () ->  LocalTime.now();
-        consumer.accept(time.get());
-        testOne();
-        testTwo();
-
+        testReduce();
     }
 
     public static void testOne(){
@@ -30,5 +29,12 @@ public class TestOne {
         Consumer<String> consumer = System.out::println;
         String bar = "This is just a test";
         consumer.accept(bar);
+    }
+
+    public static void testReduce() {
+        Consumer<Integer> consumer = System.out::println;
+        List<Integer> list = Arrays.asList(1, 2, 3);
+        Stream<Integer> stream = list.stream();
+        consumer.accept(stream.reduce(0, (x, y) -> x + y));
     }
 }

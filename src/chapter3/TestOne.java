@@ -1,6 +1,7 @@
 package chapter3;
 
 import java.util.*;
+import java.util.concurrent.CompletionService;
 import java.util.function.*;
 
 /**
@@ -9,8 +10,8 @@ import java.util.function.*;
 public class TestOne {
     public static void main(String args []){
 
-        //testMap();
-        testFunction();
+
+        testBiconsumer();
     }
 
     public static void testOne(){
@@ -55,5 +56,40 @@ public class TestOne {
          Consumer<String> c = System.out::println;
          BiFunction<String, String, String> b1 = (x, y) -> x.concat(y);
          c.accept(b1.apply("hola", "calaracola"));
+     }
+
+     public static void testUnaryOperator(){
+         UnaryOperator<String> u = String::toLowerCase;
+     }
+
+     public static void testOptinal1(){
+         Consumer<Double> c = System.out::println;
+
+         Optional<Double> opt = average(90, 100);
+         opt.ifPresent(System.out::println);
+
+         opt = average();
+         c.accept(opt.orElseGet(() -> Math.random()));
+
+     }
+
+     public static Optional<Double> average(int ... scores){
+
+         if(scores.length == 0 )return Optional.empty();
+         int sum = 0;
+
+         for(int score: scores){
+             sum += score;
+         }
+
+         return Optional.of((double) sum / scores.length);
+     }
+
+     public static void testBiconsumer(){
+         Supplier<Map<String,String>> mapSupplier = HashMap::new;
+         Map map = mapSupplier.get();
+         BiConsumer <String, String> bi = (x,y) -> map.put(x, y);
+         bi.accept("test","biconsumer");
+         map.forEach((x,y) -> System.out.print("key: " + x + " value: " + y));
      }
 }
