@@ -10,12 +10,12 @@ public class FindMatchingAnimals {
         }
     }
 
-    public static void main(String [] args){
+   /* public static void main(String [] args){
         print(new Animal("fish", false, true), x -> x.canHop());
         print(new Animal("Kangaroo", true, false), x -> x.canHop());
 
         printTest(new Test("jose"), x -> x.getName());
-    }
+    }*/
 
     private static void printTest(Test test, AnotherTest anotherTest){
         System.out.println(anotherTest.testTest(test));
